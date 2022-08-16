@@ -4,7 +4,7 @@
 Its a markdown repository
 
 ## Objective for Exercise
-We will create different data visualizations using the {::comment} ggplot {:/comment} <span style="color:green;font-weight:700;font-size:20px"> ggplot
+We will create different data visualizations using the ::comment ggplot :/comment <span style="color:green;font-weight:700;font-size:20px"> ggplot
 </span> package using the inbuilt dataset in "R" called <span style="color🔴;font-weight:700;font-size:20px">mtcars
 </span>
 
