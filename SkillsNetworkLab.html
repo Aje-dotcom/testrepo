@@ -1,0 +1,1930 @@
+<head>
+  <title>Skills Network Labs</title>
+</head>
+
+<nav class="navbar navbar-inverse navbar-fixed-top" style="margin-bottom: 0; font-weight: normal; height: 50px;">
+    <div class="container-fluid">
+
+        <div class="navbar-left pull-left">
+            <a href="#menu-toggle" id="menu-toggle" aria-label="Open the Labs menu">
+                <span class="fa fa-bars fa-2x" style="padding-top: 12px; color: #ccc; display: inline-block" aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div class="navbar-header pull-left" style="margin-left: 0">
+            <span class="navbar-brand" style="margin-left: 0; color: #ccc">Skills Network Labs</span>
+        </div>
+        <div class="navbar-header pull-left" style="margin-left: 20px;">
+            <div id="navbar-logo-divider" style="display: none; border-left: 2px solid #ccc;position: absolute;top: 25%;bottom: 25%;"></div>
+            <span id="navbar-logo-wrapper" class="navbar-brand" style="margin-left: 0;"></span>
+        </div>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li id="whatsnew" aria-hidden="true" title="What's New" style="padding-right:5rem; padding-top:1.25rem;"><div id="noticeable-widget"></div></li>
+            <li id="notifications-button" class="dropdown" aria-hidden="true" title="Notifications">
+            <span style="display: none;">Notifications</span>
+                <a href="#notifications" class="dropdown-toggle" data-toggle="dropdown" style="padding-top: 15px; display: inline-block">
+                    <span id="notifications_count" class="badge" style="font-size:10px;"></span>
+                    <span class="fa fa-bell fa-lg"></span>
+                </a>
+                <ul id="notifications" class="dropdown-menu" style="background-color: #222222">
+                    <li class="no-notifications"> You don't have any notifications. </li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" id="dropdown" data-toggle="dropdown" href="#">Account<span class="caret"></span></a>
+                <ul class="dropdown-menu" style="background-color: #222222">
+                    <li><a href="/profile">Profile</a></li>
+                    <li><a href="/session_history">Session History</a></li>
+                    <li><a href="/logout" class="hyperlink">Logout</a></li>
+                </ul>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+
+<style>
+
+    /* begin notifications-related css */
+    #notifications {
+      min-width: 550px;
+    }
+
+    #mark_all_read {
+        color: #9d9d9d;
+        cursor: pointer;
+    }
+
+    #mark_all_read:hover {
+        color: white;
+    }
+
+    #notifications .notification {
+        padding: 5px 20px;
+        border: 1px solid black;
+        color: black;
+        background-color: white;
+    }
+
+    #notifications .no-notifications {
+        padding: 12px 20px;
+        border: 1px solid black;
+        color: black;
+        background-color: white;
+        text-align: center;
+    }
+
+    #notifications .notification.read {
+        background-color: #AFAFAF;
+    }
+
+    #previous_notifications {
+        color: #9d9d9d;
+        text-align: center;
+        padding: 5px;
+    }
+
+    .badge {
+        float: inline-start;
+        background:#fa3e3e !important;
+        position:relative;
+        top: -5px;
+        left: 10px;
+    }
+
+    a:hover .badge {
+        background:#ff7e7e;
+    }
+    /* end notifications-related css */
+
+    .navbar-default .navbar-nav > li.dropdown:hover > a,
+    .navbar-default .navbar-nav > li.dropdown:hover > a:hover,
+    .navbar-default .navbar-nav > li.dropdown:hover > a:focus {
+        background-color: rgb(34, 34, 34);
+        color: rgb(85, 85, 85);
+    }
+
+    .navbar-collapse.collapse {
+        display: block !important;
+    }
+
+    .navbar-collapse{
+        margin-left: 0 !important;
+    }
+
+    .navbar-nav>li, .navbar-nav {
+        float: left !important;
+    }
+
+    .navbar-nav.navbar-right:last-child {
+        margin-right: -15px !important;
+    }
+
+    .navbar-right {
+        float: right!important;
+    }
+
+    li.dropdown:hover > .dropdown-menu {
+        display: block;
+    }
+
+    .dropdown-menu > li > a {
+        color: #CDCDCD !important;
+    }
+
+    .navbar-inverse .navbar-nav>li>a {
+        color: #ccc;
+    }
+
+</style>
+<script>
+  var branding_color_background = window.sessionStorage.getItem("branding_color_background")
+  var branding_color_text = window.sessionStorage.getItem("branding_color_text")
+  var branding_logo = window.sessionStorage.getItem("branding_logo")
+
+  if (branding_color_background && branding_color_text) {
+    console.log("applying branding")
+    var sheet = document.createElement("style");
+    sheet.innerHTML = "\
+    nav.navbar {background-color: " + branding_color_background + " !important;} \
+    nav.navbar span[style], nav.navbar a[style], nav.navbar a {color: white !important;}"
+    console.log(sheet)
+    document.body.appendChild(sheet)
+  }
+if (branding_logo) {
+  var logo = document.createElement("img");
+  logo.src = branding_logo;
+  logo.style = "height: 50px; position: absolute; margin: auto; height: 20px; padding-left: 15px"
+  document.querySelector("#navbar-logo-wrapper").append(logo)
+  document.querySelector("#navbar-logo-divider").style.display = "";
+
+
+}
+</script><!doctype html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Labs environment for data science with Jupyter, R, and Scala.">
+    <script>
+      !function(){'use strict';var e=['debug','destroy','do','help','identify','is','off','on','ready','render','reset','safe','set'],t=window.noticeable=window.noticeable||[];function n(e){return function(){var n=Array.prototype.slice.call(arguments);return n.unshift(e),t.push(n),t}}t.version='2.0.0',function(){for(var r=0;r<e.length;r++){var i=e[r];t[i]=n(i)}}(),function(){var e=document.createElement('script');e.async=!0,e.src='https://sdk.noticeable.io/l.js';var t=document.head;t.insertBefore(e,t.firstChild)}()}();
+      noticeable.render('widget', 'nOM8V6pxGhAI0jP0Pdl5');
+    </script>
+    <title></title>
+      <script>
+          var DEFAULT_HEARTBEAT_TIME = 1800;
+          console.log("Persisting DEFAULT_HEARTBEAT_TIME as " + DEFAULT_HEARTBEAT_TIME);
+          var INACTIVE_LOGOUT_TIME = 30;
+      </script>
+
+    
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="/static/vendor/bootstrap/css/bootstrap.min.css"
+  />
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="/static/css/app.min.css"
+  />
+  <link
+    rel="icon"
+    type="image/png"
+    href="/static/images/favicon_16x16.png"
+    sizes="16x16"
+  />
+  <link
+    rel="icon"
+    type="image/png"
+    href="/static/images/favicon_32x32.png"
+    sizes="32x32"
+  />
+  <link
+    rel="shortcut icon"
+    href="/static/images/favicon.ico"
+  />
+
+
+      
+    <!-- start Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-1433936-16"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-1433936-16', {
+        'cookie_flags': 'SameSite=Strict;Secure'
+      });
+    </script>
+    <!-- end Google Analytics -->
+  
+
+  
+    <meta name="google-site-verification" content="" />
+  
+
+  
+    <script src="https://cdn.ravenjs.com/3.6.1/raven.min.js" integrity="sha384-rKlahPWcPWms7ChtWI3cD1GNFfV0mrMOXc2ZE9FO52lTge4iQDVvcatyJISSLkkX" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+    <script defer>
+      // Once everything including subframes and stylesheets is loaded
+      window.addEventListener('load', function(){
+        function configureRaven() {
+          Raven.config('https://b052ab88487148ac9ff6eed308fd111b@sentry.skills.network/4', {
+            logger: 'monocle-frontend'
+          }).install();
+        }
+
+        if (Raven) {
+          configureRaven();
+        } else {
+          setTimeout(function(){ configureRaven(); }, 500);
+        }
+      });
+    </script>
+  
+
+    <script src="https://cdn.jsdelivr.net/npm/bowser@2.5.2/es5.min.js" integrity="sha384-meiaV8DP8WNz9bvwGCLNXn7cvfBhAbrcy7seP0AxFqFQBqwQsdFhMSnDDw3HnLnl" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+    <script src="/static/browser-support-check.js" defer>
+    </script>
+    <link rel="stylesheet" href="/static/vendor/google-system-local-font-picker/dist/jquery.fontpicker.min.css "rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2@2.0.0/dist/spectrum.min.css" integrity="sha384-KmzjXnRfDX1wMiSNIbVqWsTSYme1szY3QnEjIi1NDM+PCnmNhVay1JvmN9GK7XVC" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <script src="/static/vendor/jquery.min.js"></script>
+    <script src="/static/vendor/Lightweight-jQuery-Font-Accessibility-Plugin-EasyView/jquery.font-accessibility.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2@2.0.0/dist/spectrum.min.js" integrity="sha384-DenIEyBw14FjP2HqW+PRmEXKvqCFkde8Ybexqwl34wLi6YNnpSVe0+nlHYFJQFCb" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/static/vendor/google-system-local-font-picker/dist/jquery.fontpicker.js"></script>
+  </head>
+  <body>
+    
+  <div class="main">
+    
+      
+        <style>
+  /* Google recommends inlining small CSS */
+
+  body {
+    overflow-x: hidden;
+  }
+
+  /* Toggle Styles */
+
+  #sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: 250px;
+    width: 250px;
+    top: 50px;
+    height: 100%;
+    margin-left: -250px;
+    overflow-y: auto;
+    background: #222;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+  }
+
+  #wrapper.toggled #sidebar-wrapper {
+    width: 250px;
+  }
+
+  /* Sidebar Styles */
+
+  .sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 250px;
+    margin: 0;
+    list-style: none;
+    font-weight: normal;
+  }
+
+  .sidebar-nav li {
+    text-indent: 20px;
+    line-height: 30px;
+    font-weight: lighter;
+    font-size: 16px;
+  }
+
+  .sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #CDCDCD;
+  }
+
+  .sidebar-nav li a:hover {
+    text-decoration: none;
+    color: #fff;
+  }
+
+  .sidebar-nav li a:active,
+  .sidebar-nav li a:focus {
+    text-decoration: none;
+  }
+
+  .sidebar-nav > .sidebar-label {
+    text-indent: 20px;
+    font-size: 16px;
+    line-height: 25px;
+    font-weight: bold;
+    padding-top: 10px;
+  }
+
+  .sidebar-nav > .sidebar-label a {
+    color: #CDCDCD;
+  }
+
+  .sidebar-nav > .sidebar-label a:hover {
+    color: #CDCDCD;
+    background: none;
+  }
+
+  @media (min-width: 768px) {
+    #sidebar-wrapper {
+      top: 50px
+    }
+  }
+
+  #sidebar-wrapper.toggled {
+    width: 0;
+  }
+</style>
+
+<div id="sidebar-wrapper" class=toggled>
+  
+  
+  <ul class="sidebar-nav">
+      <li class="sidebar-label"><a>Manage Data</a></li>
+    
+      <li><a href="/tools/datasette/-/sn">Datasette - Practice and Explore SQL (Beta)</a></li>
+    
+
+
+    
+      <li class="sidebar-label"><a>Prepare Data</a></li>
+      
+      
+        <li><a href="https://vision.skills.network/">CV Studio (Alpha)</a></li>
+      
+    
+
+
+
+    <li class="sidebar-label"><a>Build Analytics</a></li>
+    
+      <li><a href="/tools/jupyterlab/">JupyterLab</a></li>
+    
+    
+    
+      <li><a href="/tools/rstudio-ide/">RStudio IDE</a></li>
+    
+    
+
+    
+
+    
+    <li class="sidebar-label"><a>Develop Applications</a></li>
+      
+      
+        <li><a href="/tools/theiadocker/">Cloud IDE (With Docker)</a></li>
+      
+      
+        <li><a href="/tools/theiaopenshift/">Cloud IDE (With OpenShift)</a></li>
+      
+    
+
+    <li class="sidebar-label"><a>Resources</a></li>
+    
+      <li><a rel="noopener" href="#" data-uv-trigger="smartvote">Submit an idea</a></li>
+    
+    <li><a rel="noopener" target="_blank" href="https://cognitiveclass.ai/blog/">Blog</a></li>
+    
+      <li><a rel="noopener" target="_blank" href="/kb">Knowledge Base</a>
+      </li>
+      <li><a rel="noopener" target="_blank" href="/forum">Feedback Forum</a></li>
+      <li><a rel="noopener" target="_blank" href="/support">Support</a></li>
+    
+    <li><a rel="noopener" target="_blank" href="https://courses.cognitiveclass.ai/">Online Learning</a></li>
+    <li><a href="/changelog">What's new</a></li>
+
+    <li class="sidebar-label"><a>Terms</a></li>
+    <li><a rel="noopener" target="_blank" href="https://cognitiveclass.ai/legal/">Terms of Use</a></li>
+    <li><a rel="noopener" target="_blank" href="https://cognitiveclass.ai/legal/#privacypolicy">Privacy Notice</a></li>
+  </ul>
+</div>
+      
+    
+    
+      
+        <div class="page toggled">
+      
+    
+    
+  
+    
+
+    
+    
+    <style>
+      body {
+        overflow: hidden !important;
+      }
+
+      .lm_tabs {
+        position: fixed !important;
+      }
+
+      .lm_content {
+        font-size: 12px;
+      }
+
+      .overflow_scroll {
+        overflow-x: hidden !important;
+        overflow-y: scroll !important;
+      }
+
+      .overflow_visible {
+        overflow: visible !important;
+      }
+
+      .lm_content a {
+        color: #70E8E8;
+        font-weight: bold;
+      }
+
+      .lm_content a:hover {
+        color: #95FBFB;
+      }
+
+      .lm_content li {
+        font-size: 16px;
+      }
+
+      .lm_content pre {
+        padding: 0.5em;
+        margin: 1em 0em;
+      }
+
+      pre {
+        background-color: #f0f0f0;
+      }
+
+      #codebutton {
+        cursor: pointer;
+        padding-top: 1px;
+        border-radius: 4px;
+        position: relative;
+        margin-right: 15px !important;
+        margin-top: 16px;
+      }
+
+      [tooltip] {
+        position: relative;
+      }
+
+      [tooltip]::before,
+        [tooltip]::after {
+        line-height: 1;
+        user-select: none;
+        pointer-events: none;
+        position: absolute;
+        display: none;
+        opacity: 0;
+
+        /* opinions */
+        text-transform: none;
+        font-size: .9em;
+      }
+
+      [tooltip]::before {
+        content: '';
+        z-index: 1001;
+        border: 5px solid transparent;
+      }
+
+      [tooltip]::after {
+        content: attr(tooltip); /* magic! */
+        z-index: 1000;
+
+        /* most of the rest of this is opinion */
+        font-family: Helvetica, sans-serif;
+        text-align: center;
+
+        /*
+        Let the content set the size of the tooltips
+        but this will also keep them from being obnoxious
+        */
+        min-width: 3em;
+        max-width: 21em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        /* visible design of the tooltip bubbles */
+        padding: 1ch 1.5ch;
+        /* margin-left: 5ch !important; */
+        border-radius: .3ch;
+        box-shadow: 0 1em 2em -.5em rgba(0, 0, 0, 0.35);
+        background: #333;
+        color: #ccc;
+      }
+
+      /* firefox only */
+      @-moz-document url-prefix() {
+        [tooltip]::after {
+          margin-bottom: 13px;
+        }
+      }
+
+      [tooltip]:hover::before,
+        [tooltip]:hover::after {
+        display: block;
+      }
+
+      /* don't show empty tooltips */
+      [tooltip='']::before,
+        [tooltip='']::after {
+        display: none !important;
+      }
+
+      /* ONLY the ::before */
+      [tooltip]:not([flow])::before,
+      [tooltip][flow^="up"]::before {
+          bottom: 100%;
+          border-bottom-width: 0;
+          border-top-color: #333;
+      }
+
+      /* ONLY the ::after */
+      [tooltip]:not([flow])::after,
+      [tooltip][flow^="up"]::after {
+          bottom: calc(100% + 5px);
+      }
+
+      /* Both ::before & ::after */
+      [tooltip]:not([flow])::before,
+      [tooltip]:not([flow])::after,
+      [tooltip][flow^="up"]::before,
+      [tooltip][flow^="up"]::after {
+          left: 50%;
+          transform: translate(-50%, -.5em);
+      }
+
+      @keyframes tooltips-vert {
+        to {
+          opacity: .9;
+          transform: translate(-50%, 0);
+        }
+      }
+
+      @keyframes tooltips-horz {
+        to {
+          opacity: .9;
+          transform: translate(0, -50%);
+        }
+      }
+
+      [tooltip]:not([flow]):hover::before,
+      [tooltip]:not([flow]):hover::after,
+      [tooltip][flow^="up"]:hover::before,
+      [tooltip][flow^="up"]:hover::after,
+      [tooltip][flow^="down"]:hover::before,
+      [tooltip][flow^="down"]:hover::after {
+          animation:
+              tooltips-vert
+              300ms
+              ease-out
+              forwards;
+      }
+
+      [tooltip][flow^="left"]:hover::before,
+      [tooltip][flow^="left"]:hover::after,
+      [tooltip][flow^="right"]:hover::before,
+      [tooltip][flow^="right"]:hover::after {
+          animation:
+              tooltips-horz
+              300ms
+              ease-out
+              forwards;
+      }
+      h1 {
+        font-size: 26px;
+        margin-bottom: 16px;
+      }
+      h2 {
+          font-size: 22px;
+          margin-bottom: 16px;
+      }
+      h3 {
+          font-size: 20px;
+          margin-bottom: 16px;
+      }
+      h4 {
+          font-size: 18px;
+          margin-bottom: 16px;
+      }
+      h5 {
+          font-size: 17px;
+      }
+      p, pre {
+          font-size: 16px;
+      }
+
+      table, th, td {
+        color: #ccc !important;
+        border: 0.5px solid #ccc !important;
+      }
+
+    </style>
+
+
+    
+    <div id="tool-markdown-wrapper" style="color: #ccc; width: 100%; height: calc(100vh - 50px);"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/golden-layout/1.5.8/goldenlayout.min.js" integrity="sha512-Wv0WxOU/zoVbtJaHKJT5G4P09oJG/9AhZVuZfOF6uQ/ufG3czdk5MBCuubhrNX8ueWn7tVZEjjvBHMqQfaMQ5Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/golden-layout/1.5.8/css/goldenlayout-base.css" integrity="sha512-GNz+noWy7bk2dKnx36zGvgtmWPe33QUf28YmCJ7aA16NtFiasISamMswxEsZU9vLJWA1VQxHKL5crjZu0fQjZg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/golden-layout/1.5.8/css/goldenlayout-dark-theme.css" integrity="sha512-XfcBrEH69BhsZ0XpvPyzOLgikhAvIG6Znbi6yKi1Jh1iYaOXSXvljWFerhcUl5LYLCuV61KhfCydQ1+MNxnilg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js" integrity="sha512-L03kznCrNOfVxOUovR6ESfCz9Gfny7gihUX/huVbQB9zjODtYpxaVtIaAkpetoiyV2eqWbvxMH9fiSv5enX7bw==" crossorigin="anonymous" referrerpolicy="no-referrer"> </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.5/purify.min.js" integrity="sha512-GaomFB92Lot7wDqZgVgLMJwQhuVUEcPHP99xmWSVE4Kq54t1jDyH7mdKDsmN8jOMSjiQq8pf7Et+OM4ml/PVMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/styles/default.min.css" integrity="sha512-kZqGbhf9JTB4bVJ0G8HCkqmaPcRgo88F0dneK30yku5Y/dep7CZfCnNml2Je/sY4lBoqoksXz4PtVXS4GHSUzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/highlight.min.js" integrity="sha512-av6ZR84Ldk6j29DMhf6v0cssEhow1VROFLoKbX7wrvzZB++/nV8m0jXbYeWcHPEzSNONImx6zwBskCUT9AQidA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+      localStorage.setItem("grade_token", "")
+      var token = localStorage.getItem("grade_token")
+      var config = {
+          settings: {
+            showPopoutIcon: false,
+            showMaximiseIcon: false,
+            showCloseIcon: false
+          },
+          content: [{
+              type: 'row',
+              content:[{
+                  type: 'component',
+                  componentName: 'Instructions',
+                  isClosable: false,
+                  width: 40,
+              },{
+                  type: 'component',
+                  componentName: 'Lab',
+                  isClosable: false,
+                  width: 60,
+              }]
+          }]
+      };
+
+      var myLayout = new GoldenLayout(config, document.getElementById('tool-markdown-wrapper'))
+
+      showdown.extension('codehighlight', function() {
+        function htmlunencode(text) {
+          return (
+            text
+              .replace(/&amp;/g, '&')
+              .replace(/&lt;/g, '<')
+              .replace(/&gt;/g, '>')
+            );
+        }
+        return [
+          {
+            type: 'output',
+            filter: function (text, converter, options) {
+              // use new shodown's regexp engine to conditionally parse codeblocks
+              var left  = '<pre><code\\b[^>]*>',
+                  right = '</code></pre>',
+                  flags = 'g',
+                  replacement = function (wholeMatch, match, left, right) {
+                    // unescape match to prevent double escaping
+                    match = htmlunencode(match);
+                    return left + hljs.highlightAuto(match).value + right;
+                  };
+              return showdown.helper.replaceRecursiveRegExp(text, replacement, left, right, flags);
+            }
+          }
+        ];
+      });
+
+      const isUrl = string => {
+        try {
+          return Boolean(new URL(string));
+        }
+        catch(e){
+          return false;
+        }
+      }
+
+
+      myLayout.registerComponent( 'Instructions', function( container, componentState ){
+          function fetchMarkdown(){
+            var instruction_mode = "legacy";
+            var instruction_token = "";
+
+            if (instruction_token && instruction_mode !== "legacy") {
+
+                if (instruction_mode === "edit") {
+                  const url = '/edit?token=';
+                  const html = `<iframe src="${url}" style="width: 100%; height: 100%; border: none;"></iframe>`;
+                  container.getElement().html(html);
+                } else {
+                  const url = '/render?token=';
+                  const html = `<iframe src="${url}" style="width: 100%; height: 100%; border: none;"></iframe>`;
+                  container.getElement().html(html);
+                }
+
+                return;
+            }
+
+
+          var url = "https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-DS0105EN-SkillsNetwork/labs/Module2/plotting_with_R.md",
+              countInstructions = (window.location.href.match(/md_instructions_url/g) || []).length,
+
+              xhr = new XMLHttpRequest(),
+              converter = new showdown.Converter({tables: true, openLinksInNewWindow: true, extensions: ['codehighlight'], metadata: true});
+          xhr.onreadystatechange = function() {
+
+            if (isUrl(url) && countInstructions == 1) {
+
+              if (xhr.readyState == 4) {
+
+                if(!url.includes('.md') || xhr.status != 200 || xhr.responseText.length == 0){
+                  container.getElement().html('<h1> You tried to start a Guided Project with invalid markdown instructions. Please contact the Guided Project author to let them know their Guided Project is broken.</h1>');
+                }
+                else {
+                  var instructionsMarkdown = xhr.responseText;
+                  var convertedHTML = converter.makeHtml(instructionsMarkdown);
+                  var sanitizedHTML = DOMPurify.sanitize(convertedHTML, { ADD_ATTR: ["target"] });
+                  const pagination = `
+                      <div id="font-toolbar" class="font-toolbar input-group">
+                        <div class="input-group-btn">
+                          <button class="increase-me btn btn-primary btn-sm zoom" id="increase-me" data-toggle="tooltip" data-placement="bottom" title="Increase font size"><i class="fa fa-font"></i><sup>+</sup></button>
+                          <button class="decrease-me btn btn-primary btn-sm zoom" id="decrease-me" data-toggle="tooltip" data-placement="bottom" title="Decrease font size"><i class="fa fa-font"></i><sup>-</sup></button>
+                          <input id="myFontPicker" class="form-control" type="text" style="display: none;">
+                          <input id="color-picker" value="#ccc"/>
+                          <button class="btn btn-primary btn-sm zoom reset" data-toggle="tooltip" data-placement="bottom" title="Reset font properties"><i class="fa fa-undo"></i></button>
+                          <button class="btn btn-primary btn-sm zoom" onclick="darkMode()" data-toggle="tooltip" data-placement="bottom" title="Light/Dark"><i class="fa fa-adjust"></i></button>
+                          <button class="btn btn-primary btn-sm zoom" onclick="print()" data-toggle="tooltip" data-placement="bottom" title="Print"><i class="fa fa-print"></i></button>
+                        </div>
+                      </div>
+                      <div class="stepper">
+                        <i class="fa fa-caret-left" id="left" onclick="previous()" ></i>
+                        Step <span id="start">1</span> of <span id="end">1</span>
+                        <i class="fa fa-caret-right" id="right" onclick="next()"></i>
+                      </div>
+                  `;
+                  const navbuttons = `<div id="previousbutton" style="float: left; padding: 15px; color: black;"><button class="btn btn-primary btn-lg" onclick="previous()">Previous</button></div><div id="nextbutton" style="float: right; padding: 15px; color: black;"><button class="btn btn-primary btn-lg" onclick="next()">Continue</button></div>`;
+                  const labcompletebutton = `<div id="completebutton" class="col-sm-12" style="margin-top: 30px;">
+                                              <div style="font-style: italic; font-size: 15px; margin-bottom: 20px;">
+                                                By clicking on this button I certify that I have successfully completed this lab exercise.
+                                              </div>
+                                              <div class="text-center">
+                                                <button id="ltiresult" class="btn btn-primary btn-lg" style="margin-bottom: 20px;" onclick="sendLTIresult()">Mark this Exercise as Complete</button>
+                                              </div>
+
+                                            </div>`;
+                  var instructionsHTML = '<div class="html-content" id="html-content" style="padding: 15px;">'+pagination + sanitizedHTML+'</div>'
+
+                  if (token.length > 0) {
+                    container.getElement().html(instructionsHTML + labcompletebutton + navbuttons)
+                  }
+                  else {
+                    container.getElement().html(instructionsHTML + navbuttons)
+                  }
+                  countHide();
+                  appendTab();
+                  appendCode();
+                  appendCodePatch();
+                  appendCodeInline();
+                  appendBlank();
+                  stepLinks(); //This method MUST come after the appendBlank method
+                  appendOverflowScroll();
+                  checkFontProperties();
+                  $(window).on("load", function(){
+                    checkColorPicker();
+                    checkFontPicker();
+                  })
+
+
+                }
+              }
+            } else {
+              console.log('invalid markdown')
+              console.log(xhr.readyState)
+              container.getElement().html('<h1> You tried to start a Guided Project with invalid markdown instructions. Please contact the Guided Project author to let them know their Guided Project is broken.</h1>');
+            }
+
+
+          }
+          xhr.open("GET", url, true);
+          xhr.setRequestHeader('Cache-Control', 'no-cache');
+          xhr.send(null);
+        }
+        fetchMarkdown()
+      });
+      myLayout.registerComponent( 'Lab', function( container, componentState ){
+          container.getElement().html( '<iframe name="tool_iframe_name" id="tool_iframe" onload="iframeLoaded()" src="https://rstudio-0-labs-prod-misc-tools-us-east-0.labs.cognitiveclass.ai/oauth_login?next=%2Fhub%2Fspawn%3F" allow="microphone; camera" style="width: 100%; height: 100%; border: none;"></iframe>' );
+      });
+      myLayout.init();
+      $(window).resize(function () {
+        myLayout.updateSize();
+      });
+
+      function darkMode() {
+        let nav = document.querySelector("nav");
+        let navbarBrand = document.getElementsByClassName("navbar-brand");
+        let fa = document.getElementsByClassName("fa");
+        let navbarNav = document.getElementById("dropdown");
+        let content = document.getElementsByClassName("lm_content");
+        let tabs = document.getElementsByClassName("lm_tab");
+        let tabsLinks = document.getElementsByClassName("lm_custom");
+
+        let stepper = document.getElementsByClassName("stepper");
+        let sidebar = document.getElementById("sidebar-wrapper");
+        let sidebarLabel = document.getElementsByClassName("sidebar-label");
+
+        nav.classList.toggle("light-nav");
+        navbarBrand[0].classList.toggle("light-navbarBrand");
+        fa[0].classList.toggle("light-fa");
+        fa[1].classList.toggle("light-fa");
+        navbarNav.classList.toggle("light-navbarNav");
+        stepper[0].classList.toggle("light-lm_stepper");
+        sidebar.classList.toggle("light-sidebar_wrapper")
+
+        content[0].classList.toggle("light-lmContent");
+
+        for (let i = 0; i < tabs.length; i++ )
+        {
+          tabs[i].classList.toggle("light-tabs");
+        }
+
+        for (let k = 0; k < tabsLinks.length; k++ )
+        {
+          tabsLinks[k].classList.toggle("light-lm_custom");
+        }
+
+        if (localStorage.getItem("fontProperties") !== null) {
+          document.getElementsByClassName("sp-preview-inner")[0].style.backgroundColor = fontProperties.color;
+        } else {
+          let div = document.getElementById( 'html-content' );
+          let defaultColor = getFont( div, 'color' );
+          document.getElementsByClassName("sp-preview-inner")[0].style.backgroundColor = defaultColor;
+        }
+
+
+      }
+
+      function appendTab() {
+        let ibmcloud = `
+          <ul class="lm_tabs" style="
+          margin-left: 60px;
+          "><li class="lm_tab lm_active">
+          <i class="lm_left"></i><span class="lm_title"><a class="lm_custom" href="https://cloud.ibm.com/" target="_blank">IBMCloud</a></span>
+          <i class="lm_right"></i></li>
+          </ul>
+        `;
+        let n = document.getElementsByClassName("lm_tabs")[1];
+        n.insertAdjacentHTML("afterend", ibmcloud);
+
+        if (window.location.href.indexOf("theia") > -1 || window.location.href.indexOf("cloud-ide") > -1) {
+
+
+          
+          let prompt = `
+            <ul class="lm_tabs" style="margin-left: 152.5px;">
+              <li class="lm_tab lm_active">
+                <i class="lm_left"></i>
+                  <span class="lm_title">
+                    <a class="lm_custom" href="#" onclick="viewApplication()">Launch Application</a>
+                  </span>
+                <i class="lm_right"></i>
+              </li>
+            </ul>
+          `;
+
+          let m = document.getElementsByClassName("lm_tabs")[2];
+          m.insertAdjacentHTML("afterend", prompt);
+          
+
+        }
+      }
+
+      function appendBlank() {
+        let content = document.getElementsByClassName("lm_content");
+        let aTags = content[0].querySelectorAll("a");
+        for(i = 0; i < aTags.length; i++)
+        {
+
+          if (aTags[i].nextSibling) {
+            if (aTags[i].nextSibling.textContent.includes("{: target=_self}")) {
+              aTags[i].setAttribute("target", "_self");
+              aTags[i].setAttribute("rel", "noreferrer noopener");
+              aTags[i].nextSibling.textContent = aTags[i].nextSibling.textContent.replace("{: target=_self}", "")
+          } else if (aTags[i].nextSibling.textContent.includes("{: target=_blank}")) {
+              aTags[i].setAttribute("target", "_blank");
+              aTags[i].setAttribute("rel", "noreferrer noopener");
+              aTags[i].nextSibling.textContent = aTags[i].nextSibling.textContent.replace("{: target=_self}", "")
+          } else {
+              aTags[i].setAttribute("target", "_blank");
+              aTags[i].setAttribute("rel", "noreferrer noopener");
+          }
+          }
+
+        }
+      }
+
+      //Count tags and hide icons on initial load
+      function countHide() {
+        let hTags = document.getElementsByTagName("H1").length; //count <h1> tags
+
+        //Hide all nav buttons if no H1 found
+         if (hTags == 0) {
+          document.getElementById("right").style.display = "none";
+          document.getElementById("left").style.display = "none";
+          document.getElementById("nextbutton").hidden = true;
+          document.getElementById("previousbutton").hidden = true;
+          if (document.getElementById("completebutton")) {
+            document.getElementById("completebutton").hidden = false;
+          }
+
+        }
+
+        localStorage.setItem('hTags', hTags);
+        let end = document.getElementById("end");
+        if (hTags != 0) {
+          end.innerHTML = hTags;
+        }
+
+
+        for (let i = 0; i < hTags; i++) {
+          document.getElementsByTagName("H1")[i].setAttribute("id", i); //assign all h1 tags numbers
+        }
+
+        //Hide all contents except first one
+        for (let k = 1; k < hTags; k++) {
+          document.getElementsByTagName("H1")[k].hidden = true;
+          let x = document.getElementById(k).nextElementSibling;
+          let selector = "H1";
+          while (x) {
+            // If we've reached our match, bail
+            if (x.matches(selector)) break;
+            x.hidden = true;
+            // Get the next sibling element
+            x = x.nextElementSibling;
+          }
+        }
+
+        //Hide left Icon and previous button on initial load
+        document.getElementById("left").style.display = "none";
+        document.getElementById("previousbutton").hidden = true;
+        if (document.getElementById("completebutton")) {
+          document.getElementById("completebutton").hidden = true;
+        }
+
+        if (hTags == 1) {
+          document.getElementById("right").style.display = "none";
+          document.getElementById("nextbutton").hidden = true;
+          if (document.getElementById("completebutton")) {
+            document.getElementById("completebutton").hidden = false;
+          }
+
+        }
+
+      }
+
+      function hideAllContentExcept(currentPage) {
+        let hTags = document.getElementsByTagName("H1").length; //count <h1> tags
+
+        if (currentPage > 0) {
+          for (let k = currentPage + 1; k < hTags; k++) {
+            document.getElementsByTagName("H1")[k].hidden = true;
+            let x = document.getElementById(k).nextElementSibling;
+            let selector = "H1";
+            while (x) {
+              // If we've reached our match, bail
+              if (x.matches(selector)) break;
+              x.hidden = true;
+              // Get the next sibling element
+              x = x.nextElementSibling;
+            }
+          }
+
+          for (let j = currentPage - 1; j >= 0; j--) {
+            document.getElementsByTagName("H1")[j].hidden = true;
+            let x = document.getElementById(j).nextElementSibling;
+            let selector = "H1";
+            while (x) {
+              // If we've reached our match, bail
+              if (x.matches(selector)) break;
+              x.hidden = true;
+              // Get the next sibling element
+              x = x.nextElementSibling;
+            }
+          }
+
+        }
+
+        if (currentPage == 0) {
+          for (let k = 1; k < hTags; k++) {
+            document.getElementsByTagName("H1")[k].hidden = true;
+            let x = document.getElementById(k).nextElementSibling;
+            let selector = "H1";
+            while (x) {
+              // If we've reached our match, bail
+              if (x.matches(selector)) break;
+              x.hidden = true;
+              // Get the next sibling element
+              x = x.nextElementSibling;
+            }
+          }
+
+          document.getElementById("left").style.display = "none";
+          document.getElementById("previousbutton").hidden = true;
+        }
+
+      }
+
+      //Optionally append copy-code button on all multi-line code blocks
+      function appendCode() {
+
+        let codeBlocks = document.getElementsByTagName("pre");
+        let codeBlocksLength = codeBlocks.length;
+        let codeButton = `<span id="codebutton" class="pull-right" tooltip="Copy" onclick= "copyCode(this)"><span class="fa fa-copy fa-lg"></span></span>`;
+
+
+        for (let i = 0; i < codeBlocksLength; i++) {
+          if (codeBlocks[i].nextElementSibling) {
+
+            if(codeBlocks[i].nextElementSibling.innerText == '{: codeblock}'){
+              codeBlocks[i].nextElementSibling.parentNode.removeChild(codeBlocks[i].nextElementSibling);
+              codeBlocks[i].innerHTML += codeButton;
+            }
+
+          }
+
+        }
+      }
+
+      function appendCodePatch() {
+        let codeBlocks = document.getElementsByTagName("pre");
+        let codeBlocksLength = codeBlocks.length;
+        let codeButton = `<span id="codebutton" class="pull-right" tooltip="Copy" onclick= "copyCode(this)"><span class="fa fa-copy fa-lg"></span></span>`;
+
+        for (let i = 0; i < codeBlocksLength; i++) {
+          if (codeBlocks[i].nextElementSibling && codeBlocks[i].nextElementSibling.nodeName == "P") {
+              if (codeBlocks[i].nextElementSibling.innerText == "{: codeblock}")
+              {
+                  codeBlocks[i].nextElementSibling.parentNode.removeChild(codeBlocks[i].nextElementSibling);
+                  codeBlocks[i].innerHTML += codeButton;
+              }
+          }
+        }
+      }
+
+      //Optionally append copy-code button on all in-line code blocks
+      function appendCodeInline() {
+        let allCodeBlocks = document.querySelectorAll('code');
+        let allCodeBlocksArray = [...allCodeBlocks];
+        let inlineCodeBlocks = allCodeBlocksArray.filter(j => j.parentNode.nodeName !== "PRE");
+        let codeButton = `<span style="margin-left: 5px;" tooltip="Copy" onclick= "copyCode(this)"><span class="fa fa-copy fa-lg"></span></span>`
+
+        for(let i = 0; i < inlineCodeBlocks.length; i++){
+            if (inlineCodeBlocks[i].nextSibling !== null) {
+              if(inlineCodeBlocks[i].nextSibling.textContent.includes("{: codeblock}")){
+                  let newText = inlineCodeBlocks[i].nextSibling.textContent.replace("{: codeblock}", "");
+                  inlineCodeBlocks[i].nextSibling.replaceWith(newText)
+                  inlineCodeBlocks[i].innerHTML += codeButton;
+            }}
+        }
+      }
+
+      function copyCode(event){
+        let code = event.parentNode.innerText;
+        let newcode = code.replace(/\n$/, '');
+        navigator.clipboard.writeText(newcode).then(function(){
+          event.setAttribute("tooltip", "Copied")
+
+          setTimeout(function(){ event.setAttribute("tooltip", "Copy"); }, 2000);
+        }, function(){
+
+        })
+      }
+
+      let currentPage = 0;
+      let page = 1;
+      function next() {
+        let hTags = localStorage.getItem("hTags");
+        currentPage++;
+        page++;
+
+        let start = document.getElementById("start");
+        start.innerHTML = page;
+        //Set visibility of Icons
+        if (currentPage == 0) {
+          document.getElementById("left").style.display = "none";
+          document.getElementById("previousbutton").hidden = true;
+          if (document.getElementById("completebutton")) {
+            document.getElementById("completebutton").hidden = true;
+          }
+        } else {
+          document.getElementById("left").style.display = "inline-block";
+          document.getElementById("previousbutton").hidden = false;
+        }
+
+        if (currentPage == hTags - 1) {
+          document.getElementById("right").style.display = "none";
+          document.getElementById("nextbutton").hidden = true;
+          if (document.getElementById("completebutton")) {
+            document.getElementById("completebutton").hidden = false;
+          }
+
+        }
+
+        //Hide all previous content
+        document.getElementsByTagName("H1")[currentPage - 1].hidden = true;
+        let x = document.getElementById(currentPage - 1).nextElementSibling;
+        let selector = "H1";
+        while (x) {
+          // If we've reached our match, bail
+          if (x.matches(selector)) break;
+          x.hidden = true;
+          // Get the next sibling element
+          x = x.nextElementSibling;
+        }
+
+        //Show all current content
+        document.getElementsByTagName("H1")[currentPage].hidden = false;
+        let y = document.getElementById(currentPage).nextElementSibling;
+        while (y) {
+          // If we've reached our match, bail
+          if (y.matches(selector)) break;
+          y.hidden = false;
+          // Get the next sibling element
+          y = y.nextElementSibling;
+        }
+
+        //Scroll to top of markdown page
+        let top = document.getElementsByClassName("lm_content");
+        top[0].scrollTop = 0;
+
+      }
+
+      function previous() {
+        let hTags = localStorage.getItem("hTags");
+        currentPage--;
+        page--;
+        let start = document.getElementById("start");
+        start.innerHTML = page;
+        //Set visibility of buttons
+        if (currentPage < hTags - 1) {
+          document.getElementById("right").style.display = "inline-block";
+          document.getElementById("nextbutton").hidden = false;
+          if (document.getElementById("completebutton")){
+            document.getElementById("completebutton").hidden = true;
+          }
+
+        }
+        if (currentPage == 0) {
+          document.getElementById("left").style.display = "none";
+          document.getElementById("previousbutton").hidden = true;
+          if (document.getElementById("completebutton")) {
+            document.getElementById("completebutton").hidden = true;
+          }
+
+        }
+        if (currentPage == hTags - 1) {
+          document.getElementById("left").style.display = "none";
+          document.getElementById("previousbutton").hidden = true;
+          if (document.getElementById("completebutton")) {
+            document.getElementById("completebutton").hidden = false;
+          }
+
+        }
+
+        //Hide all previous content
+        document.getElementsByTagName("H1")[currentPage + 1].hidden = true;
+        let x = document.getElementById(currentPage + 1).nextElementSibling;
+        let selector = "H1";
+        while (x) {
+          // If we've reached our match, bail
+          if (x.matches(selector)) break;
+          x.hidden = true;
+          // Get the next sibling element
+          x = x.nextElementSibling;
+        }
+
+        //Show all current content
+        document.getElementsByTagName("H1")[currentPage].hidden = false;
+        let y = document.getElementById(currentPage).nextElementSibling;
+        while (y) {
+          // If we've reached our match, bail
+          if (y.matches(selector)) break;
+          y.hidden = false;
+          // Get the next sibling element
+          y = y.nextElementSibling;
+        }
+      }
+
+      function stepLinks() {
+        let content = document.getElementsByClassName('lm_content');
+        let allLinks = content[0].querySelectorAll('a');
+        let allLinksArray = [...allLinks];
+        let links = allLinksArray.filter(j => j.search.includes('instructions.md'));
+
+        for (let i = 0; i < links.length; i++)
+        {
+          if (links[i].hash.includes('#'))
+          {
+              links[i].removeAttribute("target");
+              let hash = links[i].hash;
+              links[i].addEventListener("click", function()
+                  {
+                      let hTags = parseInt(localStorage.getItem("hTags"));
+                      let destination = parseInt(hash.replace( /^\D+/g, ''));
+                      let steps = 0;
+
+                      if (page > destination) {
+                          steps = page - destination;
+                      }
+                      else {
+                          steps = destination - page;
+                      }
+                      if (steps > 0 && steps <= hTags - destination) {
+                          if (destination > page){
+                              [...Array(steps)].forEach((_, i) => next());
+                          }
+                          if (destination < page) {
+                              [...Array(steps)].forEach((_, i) => previous());
+                          }
+                      }
+                  });
+          }
+        }
+
+      }
+
+      function appendOverflowScroll(){
+        let content = document.getElementsByClassName("lm_content");
+        content[0].setAttribute("id", "lm_content");
+        content[0].classList.add("overflow_scroll");
+      }
+
+      HTMLElement.prototype.printMe = printMe;
+      function printMe(query){
+        var myframe = document.createElement('IFRAME');
+        myframe.domain = document.domain;
+        myframe.style.position = "absolute";
+        myframe.style.top = "-10000px";
+        document.body.appendChild(myframe);
+        myframe.contentDocument.write(this.innerHTML) ;
+        setTimeout(function(){
+          myframe.focus();
+          myframe.contentWindow.print();
+          myframe.parentNode.removeChild(myframe) ;// remove frame
+        },1000); // wait for images to load inside iframe
+        hideAllContentExcept(currentPage);
+        window.focus();
+      }
+
+      function print() {
+        showAllContent();
+        let content = document.getElementsByClassName('lm_content')[0].printMe();
+        content[0].printMe();
+
+      }
+
+      function showAllContent() {
+        let hTags = document.getElementsByTagName("H1").length;
+        for (let k = 0; k < hTags; k++) {
+          document.getElementsByTagName("H1")[k].hidden = false;
+          let x = document.getElementById(k).nextElementSibling;
+          let selector = "H1";
+          while (x) {
+            // If we've reached our match, bail
+            if (x.matches(selector)) break;
+            x.hidden = false;
+            // Get the next sibling element
+            x = x.nextElementSibling;
+          }
+        }
+      }
+
+      //Capture print command from keyboard
+      jQuery(document).keydown(function(event) {
+        if((event.ctrlKey || event.metaKey) && event.which == 80) {
+            // Save Function
+            event.preventDefault();
+            print();
+        }
+      }
+      );
+
+
+      function sendLTIresult() {
+        if (token.length > 0) {
+          var extractedToken = token.slice(11, -2)
+          try {
+            var grading_domain = ""
+            var grading_url = "https://"+grading_domain+"/lti/results"
+            var xhr = new XMLHttpRequest();
+            xhr.open("PUT", grading_url, true);
+            xhr.setRequestHeader('Authorization', 'Bearer ' + extractedToken);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onload = function () {
+              var response = JSON.parse(xhr.responseText);
+              if (xhr.readyState == 4 && xhr.status == "200") {
+                document.getElementById('ltiresult').innerHTML = "Completion Registered"
+                document.getElementById('ltiresult').disabled = "true"
+              } else {
+                console.error('an error occured');
+              }
+            }
+            xhr.send("{}");
+
+          }
+          catch(err) {
+          }
+
+        }
+      }
+      //checks for previously selected font properties upon page refresh
+      function checkFontProperties() {
+        if (localStorage.getItem("fontProperties") !== null) {
+          let target = new Array('p', 'h1', 'h2', 'h3', 'pre');
+          let jsonFontPropertiesString = localStorage.getItem("fontProperties");
+          let fontProperties = JSON.parse(jsonFontPropertiesString);
+
+          document.getElementById("html-content").style.color = fontProperties.color;
+          document.getElementsByClassName("stepper")[0].style.color = fontProperties.color;
+
+          if (fontProperties.ParagraphFont) {
+            $(target[0]).css('font-size', fontProperties.ParagraphFont);
+            //set li font size
+            let lino = $('#lm_content li').length;
+            for (let i = 0; i < lino; i++)
+            {
+              $('#lm_content li')[i].style.fontSize = fontProperties.ParagraphFont;
+            }
+            //set span tags font size
+            let spno = $('#html-content span').length;
+            for (let i = 3; i < spno; i++)
+            {
+              $('#html-content span')[i].style.fontSize = fontProperties.ParagraphFont;
+            }
+          }
+
+          if (fontProperties.Header1Font) {
+            $(target[1]).css('font-size', fontProperties.Header1Font);
+          }
+
+          if (fontProperties.Header2Font) {
+            $(target[2]).css('font-size', fontProperties.Header2Font);
+          }
+
+          if (fontProperties.Header3Font) {
+            $(target[3]).css('font-size', fontProperties.Header3Font);
+          }
+
+          if (fontProperties.PreFont) {
+            $(target[4]).css('font-size', fontProperties.PreFont);
+          }
+
+          if (fontProperties.FontFamily) {
+            document.getElementById("html-content").style.fontFamily = fontProperties.FontFamily;
+          }
+
+          if (fontProperties.StepperFont) {
+            document.getElementsByClassName("stepper")[0].style.fontSize = fontProperties.StepperFont;
+          }
+
+        }
+      }
+
+      function checkColorPicker() {
+        if (localStorage.getItem("fontProperties") !== null) {
+          let jsonFontPropertiesString = localStorage.getItem("fontProperties");
+          let fontProperties = JSON.parse(jsonFontPropertiesString);
+          if (fontProperties.color) {
+            document.getElementsByClassName("sp-preview-inner")[0].style.backgroundColor = fontProperties.color;
+          }
+        }
+      }
+
+      function truncate(str, n){
+        return (str.length > n) ? str.substr(0, n-1) + '...' : str;
+      };
+
+      function getFont( element, property ) {
+        return window.getComputedStyle( element, null ).getPropertyValue( property );
+      }
+      function checkFontPicker() {
+        let div = document.getElementById( 'html-content' );
+        let defaultFont = getFont( div, 'font-family' );
+        let truncatedFont = truncate(defaultFont, 13);
+        if (truncatedFont.indexOf('\"') >=0) {
+          document.getElementsByClassName('fp-fontspec')[0].innerText = truncatedFont.substring(1);
+        }
+        else
+        {
+          document.getElementsByClassName('fp-fontspec')[0].innerText = truncatedFont;
+        }
+
+        if (localStorage.getItem("fontProperties") !== null) {
+          let jsonFontPropertiesString = localStorage.getItem("fontProperties");
+          let fontProperties = JSON.parse(jsonFontPropertiesString);
+
+          if (fontProperties.FontFamily) {
+            document.getElementsByClassName('fp-fontspec')[0].innerText = truncate(fontProperties.FontFamily, 13);
+          }
+        }
+      }
+    </script>
+
+    <script>
+      // "Launch Application" button onClick function
+        function viewApplication() {
+          var iframeSrc = "https://rstudio-0-labs-prod-misc-tools-us-east-0.labs.cognitiveclass.ai/oauth_login?next=%2Fhub%2Fspawn%3F";
+          var port = prompt('What port is your application running on?', '3000');
+          var username = "yourengr";
+          var toolBaseURL = iframeSrc.slice("https://".length).split("/")[0]
+          var proxyBaseUrl = toolBaseURL.replace("labs.", "proxy.")
+          if(port != null) {
+            window.open('https://' + username + '-' + port+ '.' + proxyBaseUrl, '/_blank');
+          }
+        }
+    </script>
+    <script>
+    function iframeLoaded() {
+      window.addEventListener('message', (event) => {
+      if (event && event.data && event.data.type === "request_URL") {
+      let win = window.frames.tool_iframe_name;
+      console.log("received message from the child iframe to update url")
+      if (win) {
+          let mess = {URL : window.location.href, type: "course_URL"};
+          win.postMessage(mess, "*");
+          console.log("sent URL to iframe")
+          }
+        }
+      })
+    }
+    </script>
+    <script>
+      var target = new Array('p', 'h1', 'h2', 'h3', 'pre');
+      $(window).on("load", function(){
+
+        var fontProperties = {
+          color: "",
+          ParagraphFont: "",
+          Header1Font: "",
+          Header2Font: "",
+          Header3Font: "",
+          StepperFont: "",
+          PreFont: "",
+          FontFamily: ""
+        };
+
+        $.noConflict();
+        $('#color-picker').spectrum({
+          type: "color",
+          togglePaletteOnly: "true",
+          change: function(color) {
+            document.getElementById("html-content").style.color = color;
+            document.getElementsByClassName("stepper")[0].style.color = color;
+            fontProperties.color = document.getElementById("html-content").style.color;
+            fontProperties.ParagraphFont = $(target[0]).css('font-size');
+            fontProperties.Header1Font = $(target[1]).css('font-size');
+            fontProperties.Header2Font = $(target[2]).css('font-size');
+            fontProperties.Header3Font = $(target[3]).css('font-size');
+            fontProperties.PreFont = $(target[4]).css('font-size');
+            fontProperties.FontFamily = document.getElementById('html-content').style.fontFamily;
+            fontProperties.StepperFont = document.getElementsByClassName("stepper")[0].style.fontSize;
+            localStorage.setItem("fontProperties", JSON.stringify(fontProperties));
+          },
+        });
+
+        $(".reset").click(function(){
+          let defaultFont = "Helvetica Neue for IBM, Helvetica Neue, Helvetica, Arial, Roboto, sans-serif";
+          console.log(target);
+
+          $(target[0]).css('font-size', "16px");
+          $(target[1]).css('font-size', "26px");
+          $(target[2]).css('font-size', "22px");
+          $(target[3]).css('font-size', "20px");
+          $(target[4]).css('font-size', "16px");
+          document.getElementById("html-content").style.fontFamily = defaultFont;
+          document.getElementsByClassName('fp-fontspec')[0].style.fontFamily = defaultFont;
+          document.getElementsByClassName("stepper")[0].style.fontSize = "1.8rem";
+          document.getElementsByClassName("stepper")[0].style.color = "#70E8E8";
+          document.getElementById("start").style.fontSize = "20px";
+          document.getElementById("end").style.fontSize = "20px";
+          document.getElementById("html-content").style.color = "#ccc";
+          document.getElementsByClassName("sp-preview-inner")[0].style.backgroundColor = "#ccc";
+          document.getElementsByClassName('fp-fontspec')[0].innerText = truncate(defaultFont, 13);
+
+          //reset all li tags font size
+          let lino = $('#lm_content li').length;
+          for (let i = 0; i < lino; i++)
+          {
+            $('#lm_content li')[i].style.fontSize = "16px"
+          }
+
+          //reset all span tags font size
+          let spno = $('#html-content span').length;
+          for (let i = 3; i < spno; i++)
+          {
+            $('#html-content span')[i].style.fontSize = "16px"
+          }
+
+          //reset all a tags font size
+          let atags = $('#html-content a').length;
+          for (let i = 0; i < atags; i++)
+          {
+            $('#html-content a')[i].style.fontSize = "16px"
+          }
+
+          localStorage.removeItem("fontProperties");
+        });
+
+        $(function(){
+          $('#font-toolbar').easyView({
+            container: '#html-content',
+            increaseSelector: '.increase-me',
+            decreaseSelector: '.decrease-me',
+            normalSelector: '.reset-me',
+            contrastSelector: '.change-me'
+          });
+
+          $('#increase-me').click(function(){
+            fontProperties.ParagraphFont = $(target[0]).css('font-size');
+            fontProperties.Header1Font = $(target[1]).css('font-size');
+            fontProperties.Header2Font = $(target[2]).css('font-size');
+            fontProperties.Header3Font = $(target[3]).css('font-size');
+            fontProperties.PreFont = $(target[0]).css('font-size');
+
+            for (let i = 0; i < $(target[4]).length; i++) {
+              $(target[4])[i].style.fontSize = fontProperties.PreFont;
+            }
+
+            fontProperties.color = document.getElementById("html-content").style.color;
+            fontProperties.FontFamily = document.getElementById("html-content").style.fontFamily;
+            fontProperties.StepperFont = document.getElementsByClassName("stepper")[0].style.fontSize;
+            localStorage.setItem("fontProperties", JSON.stringify(fontProperties));
+
+          });
+
+          $('#decrease-me').click(function(){
+            fontProperties.ParagraphFont = $(target[0]).css('font-size');
+            fontProperties.Header1Font = $(target[1]).css('font-size');
+            fontProperties.Header2Font = $(target[2]).css('font-size');
+            fontProperties.Header3Font = $(target[3]).css('font-size');
+            fontProperties.PreFont = $(target[0]).css('font-size');
+
+            for (let i = 0; i < $(target[4]).length; i++) {
+              $(target[4])[i].style.fontSize = fontProperties.PreFont;
+            }
+
+            fontProperties.color = document.getElementById("html-content").style.color;
+            fontProperties.FontFamily = document.getElementById("html-content").style.fontFamily;
+            fontProperties.StepperFont = document.getElementsByClassName("stepper")[0].style.fontSize;
+            localStorage.setItem("fontProperties", JSON.stringify(fontProperties));
+
+          });
+        });
+
+      });
+
+    </script>
+    <style>
+      .stepper {
+        font-size: 1.8rem;
+        color: #70E8E8;
+        margin-top: 10px;
+        text-align: center;
+        font-weight: 900;
+        padding: 10px;
+      }
+
+      .fa {
+          cursor: pointer;
+        }
+
+      .settings {
+        background-color: #222222; !important;
+      }
+
+      .font-toolbar {
+        border-color: #3c3c3c;
+        margin-top: -14px;
+        margin-left: -14px;
+        position: sticky;
+        top: 0px;
+      }
+
+      .input-group-btn {
+        text-align: center;
+      }
+
+      .button, input, optgroup, select, textarea {
+        margin-top: -20px;
+      }
+
+      .lm_tabs {
+        color: #ccc !important;
+      }
+
+      
+
+      .lm_tabs, a{
+        color: #ccc;
+      }
+
+      .light-nav{
+        background-color: #ccc;
+      }
+
+      .light-navbarBrand{
+        color: #222 !important;
+      }
+
+      .light-fa{
+        color:#222 !important;
+      }
+
+      .light-navbarNav{
+        color:#222 !important;
+      }
+
+      .light-navbarNav a:hover{
+        color:#222 !important;
+      }
+
+      .light-lmContent{
+        background: #ccc;
+        color: black;
+      }
+
+      .light-lmContent a{
+        color: #70bae8 !important;
+      }
+
+      .light-tabs {
+        color:#222 !important;
+        background: #ccc !important;
+      }
+
+      .light-lm_custom {
+        color:#222 !important;
+      }
+
+      .light-lm_stepper {
+        color:#70bae8;
+      }
+
+      .light-sidebar_wrapper{
+        background:#ccc !important;
+      }
+
+      .light-sidebar_wrapper a{
+        color:#222 !important;
+      }
+
+      .zoom {
+        width: 11%;
+        background-color: #3c3c3c;
+        border-color: #3c3c3c;
+        margin-bottom: 24px !important;
+      }
+
+      .zoom:hover {
+        background-color: #ccc;
+        border-color: #3c3c3c;
+
+      }
+
+      .font-picker.fp-select {
+        width: 40%;
+        line-height: 15px !important;
+        font-size: 13px !important;
+        height: 24px !important;
+      }
+
+      .sp-replacer {
+        width: 11%;
+        vertical-align: baseline !important;
+        height: 2.4rem !important;
+        border-radius: 0px !important;
+      }
+
+      .font-picker.fp-select {
+        border-radius: 0rem !important;
+      }
+
+      .close {
+        color: white;
+      }
+
+      .sp-dd {
+        font-size: 10px !important;
+        padding: 4px 2px !important;
+      }
+    </style>
+
+    
+
+  
+
+
+    
+      </div>
+    
+  </div>
+
+  </script>
+
+
+
+    
+
+      
+  
+    <script type="text/javascript">
+      var sidebarConfig = {
+        minimized: true
+      };
+    </script>
+  
+
+  <script src="/static/js/bundle.min.js"></script>
+
+      <script>
+
+        function applyFont(element, fontSpec) {
+
+          // Split font into family and weight/style
+          var tmp = fontSpec.split(':'),
+          family = tmp[0],
+          variant = tmp[1] ||'400',
+          weight = parseInt(variant,10),
+          italic = /i$/.test(variant);
+
+          // Set selected font on paragraphs
+          var css = {
+
+            fontFamily:"'" + family +"'",
+
+            fontWeight: weight,
+
+            fontStyle: italic ?'italic' :'normal'
+          };
+
+          $(element).css(css);
+
+        }
+
+        $(window).on("load", function(){
+          if ($( "#myFontPicker" ).length) {
+
+            $('#myFontPicker')
+              .fontpicker()
+              .on('change', function() {
+              applyFont('#html-content', this.value);
+              //Get existing font information and update
+              let newFont = this.value.substring(0, this.value.length - 4);
+              if (localStorage.getItem("fontProperties") !== null) {
+                let jsonFontPropertiesString = localStorage.getItem("fontProperties");
+                let fontProperties = JSON.parse(jsonFontPropertiesString);
+                fontProperties.FontFamily = newFont;
+                localStorage.setItem("fontProperties", JSON.stringify(fontProperties));
+              }
+              else {
+
+                var fontProperties = {
+                };
+                if (document.getElementsByTagName("p").length > 0) {
+                  fontProperties.ParagraphFont = document.getElementsByTagName("p")[0].style.fontSize;
+                }
+                if (document.getElementsByTagName("h1").length > 0) {
+                  fontProperties.Header1Font = document.getElementsByTagName("h1")[0].style.fontSize;
+                }
+                if (document.getElementsByTagName("h2")) {
+                  fontProperties.Header2Font = document.getElementsByTagName("h2")[0].style.fontSize;
+                }
+                if (document.getElementsByTagName("h3").length > 0) {
+                  fontProperties.Header3Font = document.getElementsByTagName("h3")[0].style.fontSize;
+                }
+                if (document.getElementsByTagName("pre").length > 0) {
+                  fontProperties.PreFont = document.getElementsByTagName("pre")[0].style.fontSize;
+                }
+                fontProperties.StepperFont = document.getElementsByClassName("stepper")[0].style.fontSize;
+                fontProperties.FontFamily = newFont;
+
+                localStorage.setItem("fontProperties", JSON.stringify(fontProperties));
+              }
+
+            });
+          }
+
+
+        });
+
+      </script>
+
+      <!-- minimize sidebar -->
+      <script>
+          $(function () {
+              $("#menu-toggle").click(function(e) {
+                  e.preventDefault();
+                  $("#sidebar-wrapper").toggleClass("toggled");
+                  $(".page").toggleClass("toggled");
+              });
+          });
+      </script>
+
+    
+
+      <script defer>
+        var appcuesLoader = document.createElement("script");
+
+        appcuesLoader.addEventListener("load", function() {
+          function configureAppcues() {
+            // Adblockers can block Appcues
+            if (Appcues) {
+              
+                Appcues.identify('yourengr');
+              
+            }
+          }
+
+          if (Appcues) {
+            configureAppcues();
+          } else {
+            setTimeout(function(){ configureAppcues(); }, 500);
+          }
+        });
+
+        appcuesLoader.src = 'https://fast.appcues.com/37753.js';
+        // Defer is better than async because it doesn't block rendering
+        appcuesLoader.defer = true;
+        document.getElementsByTagName("script")[0].parentNode.appendChild(appcuesLoader);
+      </script>
+
+    
+
+    
+    
+      <!-- start UserVoice -->
+      <script type='text/javascript' defer>
+        // Once the document is loaded but not stylesheets or subdocuments
+        window.addEventListener('DOMContentLoaded', function() {
+          var api_key = 'O5SLs1K1RfWhBYkHvMaXTg'; // pragma: whitelist secret
+          var forum_id = '246775';
+
+          // Include the UserVoice JavaScript SDK (only needed once on a page)
+          UserVoice = window.UserVoice || [];
+          (function () {
+            var uv = document.createElement('script');
+            uv.type = 'text/javascript';
+            uv.async = true;
+            uv.src = 'https://widget.uservoice.com/' + api_key + '.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(uv, s)
+          })();
+
+          
+            UserVoice.push(['setSSO', 'Ra0v1nh/ZOYzMr3jPTOPnFQCg4j4iXhuX8VkCrSqr8eWsF5IeTbCWYeWsCKFeDxyKIHYmSzUFUcUjpqhO4JIuMJAG/STC8hp3Z6j1iimzfNYJXuiphUfTtbeJzdp%2BN5eXt5hJ3aXlWL76aNXs9fQ%2BxuGeyC3a4ExP/mRy7DT7P8%3D']);
+          
+
+          //
+          // UserVoice Javascript SDK developer documentation:
+          // https://www.uservoice.com/o/javascript-sdk
+          //
+          UserVoice.push(['showTab', 'classic_widget', {
+            mode: 'full',
+            primary_color: '#19496A',
+            link_color: '#007dbf',
+            default_mode: 'support',
+            tab_label: "Support/Feedback",
+            tab_color: '#19496A',
+            tab_position: 'middle-right',
+            tab_inverted: false
+          }]);
+
+          // Post new ideas to IBM Data Scientist Workbench forum
+          UserVoice.push(['set', 'forum_id', forum_id]);
+
+          
+            UserVoice.push(['identify', {
+              email: 'yourengr@gmail.com',
+              name: ' '
+            }]);
+          
+        });
+
+      </script>
+      <!-- end UserVoice -->
+    
+
+    
+  </body>
+</html>
