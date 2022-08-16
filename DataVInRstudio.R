@@ -1,12 +1,17 @@
-library(datasets) # Load Data
+# Creating Data Visualization Using ggplot
 
-data("mtcars") # View first 5 rows
+library(datasets) 
+## Load Data
+
+data("mtcars") 
+## View first 5 rows
 
 head(mtcars, 5)
 
-?mtcars # To get info about the variables
+# To get info about the variables
+?mtcars
 
-# Now, load ggplot package that create elegant Data Visualization using The Grammar of Graphics
+## Now, load ggplot package that create elegant Data Visualization using The Grammar of Graphics
 library (ggplot2) # Create a scatterplot of displacement (disp) and miles per gallon (mpg)
 
 ggplot(aes(x=disp,y=mpg,), data=mtcars)+geom_point()
