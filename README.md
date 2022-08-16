@@ -3,16 +3,21 @@
 Its a markdown repository
 
 ## Objective for Exercise
-We will create different data visualizations using the 'ggplot' package using the inbuilt dataset in "R" called 'mtcars'
+We will create different data visualizations using the <span style="color:green;font-weight:700;font-size:20px"> ggplot
+</span> package using the inbuilt dataset in "R" called <span style="color🔴;font-weight:700;font-size:20px">mtcars
+</span>
 
-1.	Click on the + symbol on the top left and choose 'R Script' from the menu to open a new R edit window in RStudio
-
+1.	Click on the + symbol on the top left and choose <span style="color:red;font-weight:700;font-size:20px"> 'R Script'
+</span> from the menu to open a new R edit window in <span style="color:green;font-weight:700;font-size:20px">
+    RStudio</span>
 ![image](https://user-images.githubusercontent.com/74695986/184834898-0788287d-28c1-48a5-8611-e86f954bb545.png)
 
 2.	Read and view the first 5 rows of the Data using the following:
 library(datasets)
+
 # Load Data
 data(mtcars)
+
 # View first 5 rows
 head(mtcars, 5)
 
@@ -51,5 +56,5 @@ ggplot(aes(x=vs, y=mpg, fill = vs), data = mtcars) +
 ggplot(aes(x=wt),data=mtcars) + geom_histogram(binwidth=0.5)
 This concludes this lab, we hope that you had fun!
 
-Author(s)
-Ekene Emmanuel Ajemba
+## Author(s)
+# Ekene Emmanuel Ajemba
