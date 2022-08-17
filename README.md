@@ -42,6 +42,7 @@ Hold Ctrl + Sht + Alt + N
 
 ## change axis name
 ``ggplot(aes(x=disp,y=mpg,),data=mtcars)+geom_point()+ggtitle("displacement vs miles per gallon") + labs(x = "Displacement", y = "Miles per Gallon")``
+![2022-08-15 06_24_45-Skills Network Labs](https://user-images.githubusercontent.com/74695986/185055978-d0c0f5bc-a091-4015-b8af-9a40d9fbb2c0.png)
 
 7.	Use the following to create a boxplot of the the distribution of mpg for the individual Engine types `vs` Engine `(0 = V-shaped, 1 = straight)`
 
@@ -56,14 +57,15 @@ To do this you have to make vs a string or factor.
 ``ggplot(aes(x=vs, y=mpg), data = mtcars) + geom_boxplot()``
 
 8.	Add color to the boxplots to help differentiate:
-```ggplot(aes(x=vs, y=mpg, fill = vs), data = mtcars) + 
+``ggplot(aes(x=vs, y=mpg, fill = vs), data = mtcars) + 
   geom_boxplot(alpha=0.3) +
-  theme(legend.position="none")```
+  theme(legend.position="none")``
 
 9.	Finally, let us create the histogram of weight `wt`.
 
 ```ggplot(aes(x=wt),data=mtcars) + geom_histogram(binwidth=0.5)```
+
 This concludes this lab, I hope that you had fun!
 
 ## Author(s)
-*_ Ekene Emmanuel Ajemba_*
+# _ Ekene Emmanuel Ajemba_*
