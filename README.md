@@ -68,4 +68,4 @@ To do this you have to make vs a string or factor.
 This concludes this lab, I hope that you had fun!
 
 ## Author(s)
-# _ Ekene Emmanuel Ajemba_*
+*__ Ekene Emmanuel Ajemba __*
