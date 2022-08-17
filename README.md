@@ -53,17 +53,17 @@ To do this you have to make vs a string or factor.
 ![2022-08-15 06_26_52-](https://user-images.githubusercontent.com/74695986/184842238-bb9db197-920e-4afc-b51b-d660be941e4c.png)
 
 # create boxplot of the distribution for v-shaped and straight Engine
-`ggplot(aes(x=vs, y=mpg), data = mtcars) + geom_boxplot()`
+``ggplot(aes(x=vs, y=mpg), data = mtcars) + geom_boxplot()``
 
 8.	Add color to the boxplots to help differentiate:
 ```ggplot(aes(x=vs, y=mpg, fill = vs), data = mtcars) + 
   geom_boxplot(alpha=0.3) +
   theme(legend.position="none")```
 
-9.	Finally, let us create the histogram of weight ``wt``.
+9.	Finally, let us create the histogram of weight `wt`.
 
 ```ggplot(aes(x=wt),data=mtcars) + geom_histogram(binwidth=0.5)```
 This concludes this lab, I hope that you had fun!
 
-## `Author(s)`
+## Author(s)
 *_ Ekene Emmanuel Ajemba_*
