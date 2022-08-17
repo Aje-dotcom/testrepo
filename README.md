@@ -7,18 +7,24 @@ Its a markdown repository
 We will create different data visualizations using the `ggplot`package using the inbuilt dataset in `"R"` called `mtcars`
 This is set up on lab.cognitiveclass.ai (formerly Big Data University) by IBM Developer Skills Network
 
-1.	Click on the + symbol on the top left and choose `'R Script'` from the menu to open a new R edit window in RStudio
+1.	Click on the + symbol on the top left and choose `'R Script'` from the menu to open a new R edit window in **RStudio**
 ![image](https://user-images.githubusercontent.com/74695986/184834898-0788287d-28c1-48a5-8611-e86f954bb545.png)
 OR 
 Hold Ctrl + Sht + Alt + N 
 2.	Read and view the first 5 rows of the Data using the following:
-```library(datasets)```
+```javascript
+library(datasets)
+```
 
 ## Load Data
-```data(mtcars)```
+```javascript
+data(mtcars)
+```
 
 # View first 5 rows
-```head(mtcars, 5)```
+```javascript
+head(mtcars, 5)
+```
 
 3.	Type this ?mtcars to get information about the variables. This will print the information at the bottom right panel, on the Help tab
 
@@ -69,4 +75,6 @@ To do this you have to make vs a string or factor.
 This concludes this lab, I hope that you had fun!
 
 ## Author(s)
-*``` Ekene Emmanuel Ajemba ```*
+**```javascript
+Ekene Emmanuel Ajemba 
+```**
