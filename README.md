@@ -22,7 +22,8 @@ Hold Ctrl + Sht + Alt + N
 
 3.	Type this ?mtcars to get information about the variables. This will print the information at the bottom right panel, on the Help tab
 
-4.	Copy and paste the following code to load the ggplot package and create a scatterplot of disp and mpg.
+4.	Copy and paste the following code to load the ggplot package and create a scatterplot of ``disp`` and ``mpg.``
+5.	
 ## Load ggplot package
 ```library(ggplot2)```
 ![2022-08-14 08_15_21-Skills Network Labs](https://user-images.githubusercontent.com/74695986/184840927-0813e235-8180-4200-a3a9-3c8d8e3db2c2.png)
@@ -68,4 +69,4 @@ To do this you have to make vs a string or factor.
 This concludes this lab, I hope that you had fun!
 
 ## Author(s)
-*__ Ekene Emmanuel Ajemba __*
+*``` Ekene Emmanuel Ajemba ```*
